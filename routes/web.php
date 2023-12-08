@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CommentController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,4 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('home');
+Route::get('/list', [CommentController::class, 'index']);
+Route::get('/create', [CommentController::class, 'create'])->name('create');
+Route::post('/feedback/store', [CommentController::class, 'store'])->name('store');
