@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('current_position');
             $table->string('current_company');
             $table->text('comment');
-            $table->string('status')->default('pending');;
+            $table->string('status')->default('approve');;
             $table->timestamps();
         });
     }

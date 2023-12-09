@@ -10,7 +10,7 @@ class CommentController extends Controller
 {
     public function index()
     {
-        $comments = Comment::all();
+        $comments = Comment::where('status', 'Approve')->latest()->get();
         return view('Comment.index', compact('comments'));
     }
 
@@ -21,18 +21,17 @@ class CommentController extends Controller
 
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
+        $validator = $request->validate([
             'first_name' => 'required',
             'last_name' => 'required',
-            'email' => 'required|email|unique:comment,email',
+            'email' => 'required|email|unique:comments,email',
             'current_position' => 'required',
             'current_company' => 'required',
             'comment' => 'required',
-            'status' => 'required',
         ]);
         if ($validator) {
             Comment::create($request->all());
-            return redirect('/')->with('success', 'comment submitted successfully!');
+            return redirect('/')->with('success', 'Thank You For Your Support!');
         }
     }
 }
