@@ -107,7 +107,6 @@
             display: flex;
             align-items: center;
             margin-top: 20px;
-
         }
 
         .testimonialBox .details .imgBx {
@@ -150,6 +149,16 @@
                 width: 400px;
                 height: 500px;
             }
+
+            .testimonialBox .comment {
+                height: 300px;
+                width: 320px;
+                overflow-y: auto;
+                word-wrap: break-word;
+                overflow-x: hidden;
+                scrollbar-width: thin;
+                scrollbar-color: #39ff14 #29332b;
+            }
         }
 
         @media (max-width: 500px) {
@@ -158,6 +167,30 @@
                 width: 300px;
                 height: 500px;
             }
+
+            .testimonialBox .comment {
+                height: 300px;
+                width: 200px;
+                overflow-y: auto;
+                word-wrap: break-word;
+                overflow-x: hidden;
+                scrollbar-width: thin;
+                scrollbar-color: #39ff14 #29332b;
+            }
+
+            .testimonialBox .details h3 {
+                font-size: 16px;
+                font-weight: 400;
+                letter-spacing: 1px;
+                color: #39ff14;
+                line-height: 1.1em;
+                text-shadow: 0 0 0.5rem #39ff14;
+            }
+
+            .testimonialBox .details h3 span {
+                font-size: 12px;
+                color: #39ff14;
+            }
         }
 
         @media (max-width: 350px) {
@@ -165,6 +198,48 @@
             .swiper-slide {
                 width: 200px;
                 height: 500px;
+            }
+
+            .testimonialBox .details .imgBx {
+                position: relative;
+                width: 30px;
+                height: 30px;
+                border-radius: 50%;
+                overflow: hidden;
+                box-shadow: 0 0 0.5rem #39ff14;
+            }
+
+            .testimonialBox .details .imgBx img {
+                position: relative;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+            .testimonialBox .comment {
+                height: 300px;
+                width: 150px;
+                overflow-y: auto;
+                word-wrap: break-word;
+                overflow-x: hidden;
+                scrollbar-width: thin;
+                scrollbar-color: #39ff14 #29332b;
+            }
+
+            .testimonialBox .details h3 {
+                font-size: 12px;
+                font-weight: 400;
+                letter-spacing: 1px;
+                color: #39ff14;
+                line-height: 1.1em;
+                text-shadow: 0 0 0.5rem #39ff14;
+            }
+
+            .testimonialBox .details h3 span {
+                font-size: 10px;
+                color: #39ff14;
             }
         }
     </style>
@@ -211,26 +286,6 @@
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 
     <!-- Initialize Swiper -->
-    {{-- <script>
-        var swiper = new Swiper(".mySwiper", {
-            effect: "coverflow",
-            grabCursor: true,
-            centeredSlides: true,
-            slidesPerView: "auto",
-            coverflowEffect: {
-                rotate: 0,
-                stretch: 0,
-                depth: 100,
-                modifier: 2,
-                slideShadows: true,
-            },
-            autoplay: {
-                delay: 2500,
-                disableOnInteraction: false,
-            },
-            loop: true,
-        });
-    </script> --}}
     <script>
         var swiper = new Swiper(".mySwiper", {
             effect: "coverflow",
