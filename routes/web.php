@@ -17,6 +17,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 })->name('home');
-Route::get('/list', [CommentController::class, 'index']);
+Route::get('/list', [CommentController::class, 'index'])->name('list');
 Route::get('/create', [CommentController::class, 'create'])->name('create');
 Route::post('/feedback/store', [CommentController::class, 'store'])->name('store');

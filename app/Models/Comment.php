@@ -16,5 +16,6 @@ class Comment extends Model
         'current_company',
         'comment',
         'status',
+        'photo'
     ];
 }

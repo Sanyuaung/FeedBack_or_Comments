@@ -8,9 +8,34 @@
             </h1>
             <p class="mt-3 text-lg  font-serif" style="color: #39ff14;">Your Voice, My Strength!</p>
         </div>
-        <form class="mx-auto mt-16 max-w-xl sm:mt-20" action="{{ route('store') }}" method="post">
+        <form class="mx-auto mt-16 max-w-xl sm:mt-20" action="{{ route('store') }}" method="post"
+            enctype="multipart/form-data">
             @csrf
             <div class="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
+                <div class="sm:col-span-2">
+                    {{-- <label class="block text-sm font-serif font-bold leading-6" style="color: #39ff14;">Photo</label> --}}
+                    <div class="flex items-center">
+                        <label for="photo" class=" cursor-pointer">
+                            <input type="file" id="photo" name="photo" class="hidden" accept="image/*"
+                                onchange="handlePhotoChange(event)">
+                            <span class="block text-sm font-serif font-bold leading-6" style="color: #39ff14;">Choose
+                                Photo</span>
+                        </label>
+                        <div id="photo-container" class="ml-5 overflow-hidden"
+                            style="width: 100px; height: 100px; border-radius: 10px; border: 1px solid white;">
+                            <!-- Selected photo will be displayed here -->
+                            <!-- You can add a default photo or leave it empty initially -->
+                        </div>
+                        <span id="close-icon" class="ml-4 cursor-pointer hidden" onclick="clearPhoto()">
+                            <i class='bx bx-x' style="color: #39ff14;"></i>
+                        </span>
+                    </div>
+                    <div class="mt-2.5">
+                        @error('photo')
+                            <p class="font-serif text-red-500">{{ $message }}</p>
+                        @enderror
+                    </div>
+                </div>
                 <div>
                     <label for="first_name"
                         class="block text-sm font-serif font-bold leading-6"style="color: #39ff14;">First
@@ -82,7 +107,7 @@
                         <input type="email" name="email" id="email" autocomplete="email"
                             placeholder="Your Email Address"
                             class="block font-serif w-full rounded-md border-0 px-3.5 py-2 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6"
-                            style="color: #39ff14;background-color: #250821" value="{{ old('email') }}">
+                            style="color: #39ff14;background-color: #250821;" value="{{ old('email') }}">
                     </div>
                     <div class="mt-2.5">
                         @error('email')
@@ -107,10 +132,10 @@
             </div>
             <div class="mt-10 grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
                 <a href="{{ route('home') }}"
-                    class="text-center bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4  font-serif rounded-full"
+                    class="text-center border-green-700 border-solid border hover:bg-green-700 hover:text-white font-bold py-2 px-4 font-serif rounded-full"
                     style="color: #39ff14;"><i class='bx bx-right-arrow bx-rotate-180'></i> Back</a>
                 <button type="submit"
-                    class="text-center bg-white-500 hover:bg-green-700 hover:text-white font-bold py-2 px-4 font-serif rounded-full"
+                    class="text-center border-green-700 border-solid border hover:bg-green-700 hover:text-white font-bold py-2 px-4 font-serif rounded-full"
                     style="color: #39ff14;">Submit
                     <i class='bx bxs-send bx-tada bx-rotate-180'></i>
                 </button>
@@ -118,4 +143,36 @@
             </div>
         </form>
     </div>
+
+    <script>
+        function handlePhotoChange(event) {
+            const photoContainer = document.getElementById('photo-container');
+            const closeIcon = document.getElementById('close-icon');
+
+            // Display the selected photo
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    photoContainer.innerHTML =
+                        `<img src="${e.target.result}" alt="Selected Photo" class="w-full h-full object-cover">`;
+                    closeIcon.classList.remove('hidden');
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function clearPhoto() {
+            const photoContainer = document.getElementById('photo-container');
+            const closeIcon = document.getElementById('close-icon');
+            const inputPhoto = document.getElementById('photo');
+
+            // Clear the selected photo and hide the close icon
+            photoContainer.innerHTML = '';
+            closeIcon.classList.add('hidden');
+
+            // Reset the file input to allow selecting the same photo again
+            inputPhoto.value = '';
+        }
+    </script>
 @endsection

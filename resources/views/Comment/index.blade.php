@@ -3,18 +3,19 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>Swiper demo</title>
+    <title>Feedback System</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
     <!-- Link Swiper's CSS -->
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
     <!-- Demo styles -->
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
+            font-family: 'font-serif';
         }
 
         section {
@@ -58,12 +59,11 @@
 
         .testimonialBox {
             position: relative;
-            max-width: 500px;
-            max-height: 300px;
+            /* max-width: 500px;
+            max-height: 300px; */
             padding: 40px;
             padding-top: 70px;
             color: white;
-            /* font-weight: bold; */
         }
 
         .testimonialBox .quote {
@@ -73,9 +73,19 @@
             transform: rotate(180deg);
         }
 
+        .testimonialBox .quote1 {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            transform: rotate(360deg);
+        }
+
         .testimonialBox .comment {
-            height: 250px;
-            overflow: auto;
+            height: 300px;
+            width: 400px;
+            overflow-y: auto;
+            word-wrap: break-word;
+            overflow-x: hidden;
             scrollbar-width: thin;
             scrollbar-color: #39ff14 #29332b;
         }
@@ -94,21 +104,44 @@
         }
 
         .testimonialBox .details {
+            display: flex;
+            align-items: center;
             margin-top: 20px;
+
+        }
+
+        .testimonialBox .details .imgBx {
+            position: relative;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 20px;
+            box-shadow: 0 0 0.5rem #39ff14;
+        }
+
+        .testimonialBox .details .imgBx img {
+            position: relative;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+
         }
 
         .testimonialBox .details h3 {
-            font-size: 16px;
+            font-size: 20px;
             font-weight: 400;
             letter-spacing: 1px;
             color: #39ff14;
             line-height: 1.1em;
+            text-shadow: 0 0 0.5rem #39ff14;
         }
 
         .testimonialBox .details h3 span {
-            font-size: 12px;
+            font-size: 16px;
             color: #39ff14;
-            /* font-weight: bold; */
         }
 
         @media (max-width: 600px) {
@@ -145,62 +178,25 @@
                 @foreach ($comments as $comment)
                     <div class="swiper-slide">
                         <div class="testimonialBox">
-                            <img src="images/quote.png" class="quote">
+                            {{-- <img src="images/quote.png" class="quote">
+                            <img src="images/quote.png" class="quote1"> --}}
                             <div class="content">
                                 <div class="comment">
-                                    <p>{{ $comment->comment }}</p>
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam esse deserunt
-                                        optio
-                                        ex
-                                        deleniti consequuntur nulla, dolore dolores error iure, obcaecati veniam magni!
-                                        Fugiat alias quod culpa nihil aperiam accusamus.
-                                        lorLorem ipsum dolor sit amet consectetur adipisicing elit. Quam esse deserunt
-                                        optio
-                                        ex
-                                        deleniti consequuntur nulla, dolore dolores error iure, obcaecati veniam magni!
-                                        Fugiat alias quod culpa nihil aperiam accusamus.
-                                        lorLorem ipsum dolor sit amet consectetur adipisicing elit. Quam esse deserunt
-                                        optio
-                                        ex
-                                        deleniti consequuntur nulla, dolore dolores error iure, obcaecati veniam magni!
-                                        Fugiat alias quod culpa nihil aperiam accusamus.
-                                        lorLorem ipsum dolor sit amet consectetur adipisicing elit. Quam esse deserunt
-                                        optio
-                                        ex
-                                        deleniti consequuntur nulla, dolore dolores error iure, obcaecati veniam magni!
-                                        Fugiat alias quod culpa nihil aperiam accusamus.
-                                        lor
-                                        deleniti consequuntur nulla, dolore dolores error iure, obcaecati veniam magni!
-                                        Fugiat alias quod culpa nihil aperiam accusamus.
-                                        lorLorem ipsum dolor sit amet consectetur adipisicing elit. Quam esse deserunt
-                                        optio
-                                        ex
-                                        deleniti consequuntur nulla, dolore dolores error iure, obcaecati veniam magni!
-                                        Fugiat alias quod culpa nihil aperiam accusamus.
-                                        lorLorem ipsum dolor sit amet consectetur adipisicing elit. Quam esse deserunt
-                                        optio
-                                        ex
-                                        deleniti consequuntur nulla, dolore dolores error iure, obcaecati veniam magni!
-                                        Fugiat alias quod culpa nihil aperiam accusamus.
-                                        lor
-                                        deleniti consequuntur nulla, dolore dolores error iure, obcaecati veniam magni!
-                                        Fugiat alias quod culpa nihil aperiam accusamus.
-                                        lorLorem ipsum dolor sit amet consectetur adipisicing elit. Quam esse deserunt
-                                        optio
-                                        ex
-                                        deleniti consequuntur nulla, dolore dolores error iure, obcaecati veniam magni!
-                                        Fugiat alias quod culpa nihil aperiam accusamus.
-                                        lorLorem ipsum dolor sit amet consectetur adipisicing elit. Quam esse deserunt
-                                        optio
-                                        ex
-                                        deleniti consequuntur nulla, dolore dolores error iure, obcaecati veniam magni!
-                                        Fugiat alias quod culpa nihil aperiam accusamus.
-                                        lor
+                                    <p><i style="color: #39ff14;"
+                                            class='text-2xl	text-green-700 bx bxs-quote-alt-left bx-tada'></i>&nbsp;{{ $comment->comment }}&nbsp;<i
+                                            style="color: #39ff14;"
+                                            class='text-2xl	text-green-700 bx bxs-quote-alt-right bx-tada'></i>
                                     </p>
                                 </div>
                                 <div class="details">
+                                    <div class="imgBx">
+                                        <img src="{{ asset('images/users/' . $comment->photo) }}" alt=""
+                                            srcset="">
+                                    </div>
                                     <h3>{{ $comment->first_name }}
-                                        {{ $comment->last_name }}<br><br><span>{{ $comment->current_company }}({{ $comment->current_position }})</span>
+                                        {{ $comment->last_name }}<br><br><span>{{ $comment->current_position }}<br>
+                                            ({{ $comment->current_company }})
+                                        </span>
                                     </h3>
                                 </div>
                             </div>
@@ -215,6 +211,26 @@
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 
     <!-- Initialize Swiper -->
+    {{-- <script>
+        var swiper = new Swiper(".mySwiper", {
+            effect: "coverflow",
+            grabCursor: true,
+            centeredSlides: true,
+            slidesPerView: "auto",
+            coverflowEffect: {
+                rotate: 0,
+                stretch: 0,
+                depth: 100,
+                modifier: 2,
+                slideShadows: true,
+            },
+            autoplay: {
+                delay: 2500,
+                disableOnInteraction: false,
+            },
+            loop: true,
+        });
+    </script> --}}
     <script>
         var swiper = new Swiper(".mySwiper", {
             effect: "coverflow",
@@ -222,13 +238,29 @@
             centeredSlides: true,
             slidesPerView: "auto",
             coverflowEffect: {
-                rotate: 30,
+                rotate: 0,
                 stretch: 0,
                 depth: 100,
                 modifier: 2,
                 slideShadows: true,
             },
+            autoplay: {
+                delay: 2500,
+                disableOnInteraction: false,
+            },
             loop: true,
+        });
+
+        // Pause autoplay on hover
+        var swiperContainer = document.querySelector(".mySwiper");
+
+        swiperContainer.addEventListener("mouseenter", function() {
+            swiper.autoplay.stop();
+        });
+
+        // Resume autoplay on mouse leave
+        swiperContainer.addEventListener("mouseleave", function() {
+            swiper.autoplay.start();
         });
     </script>
 </body>
